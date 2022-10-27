@@ -5,7 +5,6 @@
   "private": true,
   "scripts": {
     "prepare": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && pnpm exec simple-git-hooks",
-    "format": "rome format ./*.js --write",
     "dev": "nodemon index.js",
     "build": "ncc build index.js -o dist -m && cp .env ./dist/.env",
     "start": "node ./dist/index.js"
@@ -22,7 +21,10 @@
     "rome": "0.10.1-next",
     "simple-git-hooks": "^2.8.1"
   },
+  "lint-staged": {
+    "./*.js": "rome format --write"
+  },
   "simple-git-hooks": {
-    "pre-commit": "pnpm format"
+    "pre-commit": "pnpm exec lint-staged"
   }
 }
