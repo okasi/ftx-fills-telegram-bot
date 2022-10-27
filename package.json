@@ -1,8 +1,7 @@
 {
   "name": "ftx-orders-telegram-bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "author": "@okasi",
   "private": true,
   "scripts": {
     "prepare": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && pnpm exec simple-git-hooks",
@@ -11,8 +10,6 @@
     "build": "ncc build index.js -o dist -m && cp .env ./dist/.env",
     "start": "node ./dist/index.js"
   },
-  "author": "@okasi",
-  "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.3",
     "ftx-api-ws": "^0.0.12",
