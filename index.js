@@ -44,7 +44,7 @@ console.log("FTX_SECRET", "\n", ftx.secret);
 	ftx.on("fills", (fill) => {
 		console.log(fill);
 		bot.sendMessage(
-			TELEGRAM_CHAT_ID,
+			process.env.TELEGRAM_CHAT_ID,
 			JSON.stringify(JSON.parse(fill), null, 2),
 		);
 	});
