@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "prepare": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && pnpx simple-git-hooks",
+    "prepare": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && pnpm exec simple-git-hooks",
     "format": "rome format ./*.js --write",
     "dev": "nodemon index.js",
     "build": "ncc build index.js -o dist -m && cp .env ./dist/.env",
