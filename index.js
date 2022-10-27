@@ -1,45 +1,51 @@
-require('dotenv').config()
-const TelegramBot = require('node-telegram-bot-api')
+require("dotenv").config();
 
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID
+const TelegramBot = require("node-telegram-bot-api");
 
-console.log('TELEGRAM_BOT_TOKEN', TELEGRAM_BOT_TOKEN)
-console.log('TELEGRAM_CHAT_ID', TELEGRAM_CHAT_ID)
+const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
+console.log("TELEGRAM_BOT_TOKEN", "\n", bot.token);
+console.log("TELEGRAM_CHAT_ID", "\n", process.env.TELEGRAM_CHAT_ID);
 
-const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true })
-
-const FTXWs = require('ftx-api-ws')
+const FTXWs = require("ftx-api-ws");
 
 const ftx = new FTXWs({
-  key: process.env.FTX_KEY,
-  secret: process.env.FTX_SECRET,
-})
+	key: process.env.FTX_KEY,
+	secret: process.env.FTX_SECRET,
+});
 
-;(async () => {
-  bot.on('polling_error', console.log)
+console.log("FTX_KEY", "\n", ftx.key);
+console.log("FTX_SECRET", "\n", ftx.secret);
 
-  // bot.on('message', (msg) => {
-  //   console.log(msg)
-  //   const chatId = msg.chat.id
-  //   if (chatId == TELEGRAM_CHAT_ID) {
-  //     bot.sendMessage(
-  //       chatId,
-  //       `Received your message (${msg.text}) in CORRECT chat id (${msg.chat.id})`
-  //     )
-  //   } else {
-  //     bot.sendMessage(
-  //       chatId,
-  //       `Received your message (${msg.text}) in WRONG chat id (${msg.chat.id})`
-  //     )
-  //   }
-  // })
+(async () => {
+	bot.on("polling_error", console.log);
 
-  await ftx.connect()
+	bot.on("message", (msg) => {
+		console.log(msg);
+		if (msg.from.is_bot) {
+			return null;
+		}
+		const chatId = String(msg.chat.id);
+		if (chatId === process.env.TELEGRAM_CHAT_ID) {
+			return bot.sendMessage(
+				chatId,
+				`Received your message (${msg.text}) in CORRECT chat id (${msg.chat.id})`,
+			);
+		} else {
+			return bot.sendMessage(
+				chatId,
+				`Received your message (${msg.text}) in WRONG chat id (${msg.chat.id})`,
+			);
+		}
+	});
 
-  ftx.subscribe('fills')
-  ftx.on('fills', (fill) => {
-    console.log(fill)
-    bot.sendMessage(TELEGRAM_CHAT_ID, JSON.stringify(JSON.parse(fill), null, 2))
-  })
-})()
+	await ftx.connect();
+
+	ftx.subscribe("fills");
+	ftx.on("fills", (fill) => {
+		console.log(fill);
+		bot.sendMessage(
+			TELEGRAM_CHAT_ID,
+			JSON.stringify(JSON.parse(fill), null, 2),
+		);
+	});
+})();

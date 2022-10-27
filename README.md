@@ -12,10 +12,12 @@
 
 - Rename ".env.example" to ".env" and fill in required info
 
-- `npm i` to install dependencies
+- Install pnpm if not already installed https://pnpm.io/installation
 
-- `npm run build` to build a file (./dist/index.js) with minimum required dependencies
+- `pnpm install` to install dependencies
 
-- `npm run start` to get it running
+- `pnpm run build` to build a file (./dist/index.js) with minimum required dependencies
+
+- `pnpm run start` to get it running
 
 - You should probably setup pm2 (https://pm2.keymetrics.io/docs/usage/quick-start/) on a VPS (https://cloud.hosthatch.com/a/2831) and keep it running 24/7

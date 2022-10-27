@@ -3,22 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "standard --fix",
+    "prepare": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && pnpx simple-git-hooks",
+    "format": "rome format ./*.js --write",
     "dev": "nodemon index.js",
     "build": "ncc build index.js -o dist -m && cp .env ./dist/.env",
     "start": "node ./dist/index.js"
   },
-  "author": "",
+  "author": "@okasi",
   "license": "ISC",
-  "devDependencies": {
-    "@vercel/ncc": "^0.34.0",
-    "nodemon": "^2.0.20",
-    "standard": "^17.0.0"
-  },
   "dependencies": {
     "dotenv": "^16.0.3",
     "ftx-api-ws": "^0.0.12",
     "node-telegram-bot-api": "^0.59.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.34.0",
+    "lint-staged": "^13.0.3",
+    "nodemon": "^2.0.20",
+    "rome": "0.10.1-next",
+    "simple-git-hooks": "^2.8.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm format"
   }
 }
