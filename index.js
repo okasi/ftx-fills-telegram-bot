@@ -38,8 +38,8 @@ const ftx = new FTXWs({
   await ftx.connect()
 
   ftx.subscribe('fills')
-  ftx.on('fills', (msg) => {
-    console.log(msg)
-    bot.sendMessage(TELEGRAM_CHAT_ID, JSON.stringify(JSON.parse(msg), null, 2))
+  ftx.on('fills', (fill) => {
+    console.log(fill)
+    bot.sendMessage(TELEGRAM_CHAT_ID, JSON.stringify(JSON.parse(fill), null, 2))
   })
 })()
