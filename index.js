@@ -19,21 +19,21 @@ const ftx = new FTXWs({
 ;(async () => {
   bot.on('polling_error', console.log)
 
-  bot.on('message', (msg) => {
-    console.log(msg)
-    const chatId = msg.chat.id
-    if (chatId == TELEGRAM_CHAT_ID) {
-      bot.sendMessage(
-        chatId,
-        `Received your message (${msg.text}) in CORRECT chat id (${msg.chat.id})`
-      )
-    } else {
-      bot.sendMessage(
-        chatId,
-        `Received your message (${msg.text}) in WRONG chat id (${msg.chat.id})`
-      )
-    }
-  })
+  // bot.on('message', (msg) => {
+  //   console.log(msg)
+  //   const chatId = msg.chat.id
+  //   if (chatId == TELEGRAM_CHAT_ID) {
+  //     bot.sendMessage(
+  //       chatId,
+  //       `Received your message (${msg.text}) in CORRECT chat id (${msg.chat.id})`
+  //     )
+  //   } else {
+  //     bot.sendMessage(
+  //       chatId,
+  //       `Received your message (${msg.text}) in WRONG chat id (${msg.chat.id})`
+  //     )
+  //   }
+  // })
 
   await ftx.connect()
 
