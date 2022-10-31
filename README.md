@@ -16,8 +16,6 @@
 
 - `pnpm install` to install dependencies
 
-- `
-
 - `pnpm run build` to build a file (./dist/index.js) with minimum required dependencies
 
 - `pnpm run start` to get it running
