@@ -22,7 +22,8 @@
 
 - You should probably setup pm2 (https://pm2.keymetrics.io/docs/usage/quick-start/) on a VPS (https://cloud.hosthatch.com/a/2831) and keep it running 24/7
 
+<br/>
 
-TODO:
+## TODO:
 - Debounce & edit to prevent spam
 - 1-1 private chat for simplicity
